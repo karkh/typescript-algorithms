@@ -12,15 +12,23 @@ export default class LinkedList<T> {
     // this.compare = new Comparator(comparatorFunction);
   }
 
-  append(value: T) {
+  append(value: T): LinkedList<T> {
     const newNode = new LinkedListNode<T>(value);
 
     if (!this.head) {
       this.head = newNode;
+      this.tail = newNode;
+
+      return this
     }
+
+    this.tail.next = newNode;
+    this.tail = newNode;
+
+    return this;
   }
 
-  toArray() {
+  toArray(): LinkedListNode<T>[] {
     const nodes: LinkedListNode<T>[] = [];
 
     let currentNode: LinkedListNode<T> = this.head;
